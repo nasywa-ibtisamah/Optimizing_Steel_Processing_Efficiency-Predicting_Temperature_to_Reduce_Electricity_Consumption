@@ -88,43 +88,31 @@ From the results, it can be seen that there are 196 anomalous/outlier data point
 
 ## 5. Model Training and Evaluation in Train Set
 
-The Mean MAE values on the train set are as follows:
-- Linear Regression: 7.466512240607055
-- DecisionTreeRegressor: 6.8392884302924655
-- RandomForestRegressor: 5.925812762909946
-- CatBoostRegressor: 5.762953636649324
-- XGBRegressor: 5.696816762288411
-- LGBMRegressor: 5.832958517890802
+The neg_mean_absolute_error scoring is essentially the negative of the Mean Absolute Error (MAE). It's designed this way because scikit-learn's cross-validation and grid search functions aim to maximize scoring values, so they use the negation of error metrics to find the best model. A lower (more negative) neg_mean_absolute_error indicates better model performance.
 
-  From the results above, it can be observed that all models meet the minimum MAE value requirement (<=8.7), and four other models (RandomForestRegressor, CatBoostRegressor, XGBRegressor, and LGBMRegressor) have ideal MAE values < 6.
+When I filtered the MAE value between -5.7 and -5.9, the top three models are as follows:
 
-The model with the lowest MAE value is XGBRegressor with a value of 5.696816762288411.
+CatBoostRegressor: 5.762954
+XGBRegressor: 5.777462
+LGBMRegressor: 5.894216
+From the results above, it can be observed that all models meet the minimum MAE value requirement (<= 8.7). Three models (CatBoostRegressor, XGBRegressor, and LGBMRegressor) have ideal MAE values of less than 6. The model with the lowest MAE value is CatBoostRegressor with a value of 5.762954.
 
 ## 6. Applying the trained model to Test dataset
 
-The Mean MAE values on the test set with the best parameters applied are as follows:
+The Mean MAE value on the test set, obtained by applying the best model with the best parameters, is 5.39874692476624.
 
-- Linear Regression: 7.2683977438694845
-- DecisionTreeRegressor: 6.2470174872489475
-- RandomForestRegressor: 5.340041382164282
-- CatBoostRegressor: 5.39874692476624
-- XGBRegressor: 5.3720503
-- LGBMRegressor: 5.5211766261347375
+This model meets the minimum MAE value requirement (<= 8.7) and has an ideal MAE value < 6.
 
-Similar to the MAE values on the train set, all models meet the minimum MAE value requirement (<=8.7), and four other models (RandomForestRegressor, CatBoostRegressor, XGBRegressor, and LGBMRegressor) have ideal MAE values < 6.
-The model with the lowest MAE value is XGBRegressor with a value of 5.3720503.
-
-Furthermore, the close similarity in MAE values between the train set and test set demonstrates that there is no overfitting in the model, and the model is sufficiently accurate.
+Furthermore, the close similarity in MAE values between the training set and the test set demonstrates that there is no overfitting in the model, indicating its accuracy.
 
 # Discussion
 
 ## 1. Model Evaluation Report
-
 Since the MAE values for all models meet the minimum requirement of <8.7, it can be said that the final dataset, which has undergone data preprocessing and exploratory data analysis (EDA), is already quite good, and the process is quite optimal. This can also be observed from the MAE values on the train set and test set, which are not significantly different, indicating the model is not overfitting.
 
 ## 2. Conclusions
 
-This project has successfully trained a model capable of predicting the optimal end temperature of metal during steel processing to enhance energy efficiency and reduce production costs. The plant can utilize the XGBRegressor model with the known best parameters to predict the optimal end temperature. With an MAE value of 5.37, it indicates that the average error between the model's predictions and the actual values in the test data is approximately 5.37 degrees Celsius.
+This project has successfully trained a model capable of predicting the optimal end temperature of metal during steel processing to enhance energy efficiency and reduce production costs. The plant can utilize the CatBoostRegressor model with the known best parameters to predict the optimal end temperature. With an MAE value of 5.39, it indicates that the average error between the model's predictions and the actual values in the test data is approximately 5.39 degrees Celsius.
 
 ## 3. Recommendations
 
